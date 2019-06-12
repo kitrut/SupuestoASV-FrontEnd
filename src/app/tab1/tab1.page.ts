@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Plato } from './models/plato';
 
 @Component({
   selector: 'app-tab1',
@@ -8,10 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class Tab1Page implements OnInit{
   showType:String = "Primeros";
   empleados:String[] = ["Juan","Miguel","María"];
-  platos1:Platos[] = [{id:1,nombre:"Entremeses",precio:2.5,isChecked:false,cantidad:0},{id:2,nombre:"Ensalada de marisco",precio:2.5,isChecked:false,cantidad:0},{id:3,nombre:"Boquerones",precio:2.5,isChecked:false,cantidad:0}];
-  platos2:Platos[] = [{id:1,nombre:"Macarrones",precio:2.5,isChecked:false,cantidad:0},{id:2,nombre:"Pechuga de pollo",precio:2.5,isChecked:false,cantidad:0},{id:3,nombre:"Pescado",precio:2.5,isChecked:false,cantidad:0}];
-  postres:Platos[] = [{id:1,nombre:"Fruta",precio:2.5,isChecked:false,cantidad:0},{id:2,nombre:"Helado",precio:2.5,isChecked:false,cantidad:0},{id:3,nombre:"Tarta",precio:2.5,isChecked:false,cantidad:0}];
-  pedidos:Platos[] =[];
+  platos1:Plato[] = [{id:1,nombre:"Entremeses",precio:2.5,isChecked:false,cantidad:0},{id:2,nombre:"Ensalada de marisco",precio:2.5,isChecked:false,cantidad:0},{id:3,nombre:"Boquerones",precio:2.5,isChecked:false,cantidad:0}];
+  platos2:Plato[] = [{id:1,nombre:"Macarrones",precio:2.5,isChecked:false,cantidad:0},{id:2,nombre:"Pechuga de pollo",precio:2.5,isChecked:false,cantidad:0},{id:3,nombre:"Pescado",precio:2.5,isChecked:false,cantidad:0}];
+  postres:Plato[] = [{id:1,nombre:"Fruta",precio:2.5,isChecked:false,cantidad:0},{id:2,nombre:"Helado",precio:2.5,isChecked:false,cantidad:0},{id:3,nombre:"Tarta",precio:2.5,isChecked:false,cantidad:0}];
+  pedidos:Plato[] =[];
   precioTotal:number=0;
   constructor() {}
   
@@ -19,14 +20,14 @@ export class Tab1Page implements OnInit{
 
   }
 
-  compareFn(e1: Platos, e2: Platos): boolean {
+  compareFn(e1: Plato, e2: Plato): boolean {
     return e1 && e2 ? e1.id === e2.id : e1 === e2;
   }
 
   segmentChanged(ev:any){
     this.showType = ev.detail.value;
   }
-  add(ev:Platos){
+  add(ev:Plato){
     this.precioTotal+=ev.precio;
     if(this.pedidos.includes(ev)){
       this.pedidos.find((someone)=>{return someone.nombre==ev.nombre}).cantidad+=1;
@@ -35,8 +36,7 @@ export class Tab1Page implements OnInit{
       this.pedidos.unshift(ev);
     }    
   }
-  down(ev:Platos){
-    
+  sub(ev:Plato){    
     let plato = this.pedidos.find((someone)=>{return someone.nombre==ev.nombre})
     if(plato.cantidad <=1){
       this.remove(ev)
@@ -46,19 +46,10 @@ export class Tab1Page implements OnInit{
       plato.cantidad-=1;
     }
   }
-  remove(ev:Platos){
+  remove(ev:Plato){
     this.precioTotal-=(ev.precio*ev.cantidad);
     ev.cantidad = 0;
     let index = this.pedidos.findIndex((someone)=>{return someone.nombre==ev.nombre})
     this.pedidos.splice(index,1);  
   }
-
-}
-
-class Platos{
-  id:number;
-  nombre:String;
-  precio:number;
-  isChecked:Boolean;
-  cantidad:number;
 }

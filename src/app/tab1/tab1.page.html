@@ -15,60 +15,41 @@
     </ion-select>
   </ion-item>
 
-  <ion-segment (ionChange)="segmentChanged($event)" value="Primeros">
+  <ion-segment (ionChange)="segmentChanged($event)" value="Primeros" color="tertiary">
     <ion-segment-button value="Primeros">
-      <ion-label>Primeros</ion-label>
+      Primeros
     </ion-segment-button>
     <ion-segment-button value="Segundos">
-      <ion-label>Segundos</ion-label>
+      Segundos
     </ion-segment-button>
     <ion-segment-button value="Postres">
-      <ion-label>Postres</ion-label>
+      Postres
     </ion-segment-button>
   </ion-segment>
 
-  <ion-list *ngIf="showType=='Primeros'">
-    <ion-button *ngFor="let plato of platos1" (click)="add(plato)" size="small">{{plato.nombre}}</ion-button>
-  </ion-list>
-  <ion-list *ngIf="showType=='Segundos'">
-    <ion-button *ngFor="let plato of platos2" (click)="add(plato)" size="small">{{plato.nombre}}</ion-button>
-  </ion-list>
-  <ion-list *ngIf="showType=='Postres'">
-    <ion-button *ngFor="let plato of postres" (click)="add(plato)" size="small">{{plato.nombre}}</ion-button>
-  </ion-list>
+  <div text-center>
+    <lista-platos *ngIf="showType=='Primeros'" [platos]="platos1" (OutPlato)="add($event)"></lista-platos>
+    <lista-platos *ngIf="showType=='Segundos'" [platos]="platos2" (OutPlato)="add($event)"></lista-platos>
+    <lista-platos *ngIf="showType=='Postres'" [platos]="postres" (OutPlato)="add($event)"></lista-platos>
+  </div>
 
-  <div text-center><ion-button text-center color="success">Confirmar pedido</ion-button></div>
+  <ion-row>
+    <ion-col>
+        <ion-button text-center expand="full" color="success">Confirmar pedido</ion-button>
+    </ion-col>
+    <ion-col>
+        <ion-button text-center expand="full" color="dark">Añadir nuevo plato</ion-button>
+    </ion-col>
+    <ion-col>
+        <ion-button text-center expand="full" color="danger">Cancelar</ion-button>
+    </ion-col>
+  </ion-row>
 
-  <ion-list scrollable>
-    <ion-list-header color="tertiary">
-      Pedido: {{precioTotal | number:'.2'}}&#8364;
-    </ion-list-header>
-   
-    <table>
-      <thead>
-        <tr >
-          <th><ion-label color="tertiary">Plato</ion-label></th>
-          <th>Cantidad (uds.)</th>
-          <th>Precio (&#8364;)/ud</th>
-          <th>Total (&#8364;)</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let plato of pedidos">
-          <td>{{plato.nombre}}</td>
-          <td>{{plato.cantidad}}</td>
-          <td>{{plato.precio | number:'.2'}}</td>
-          <td>{{(plato.precio * plato.cantidad)| number:'.2'}}</td>
-          <td>
-            <ion-button color="tertiary" fill="outline" size="small" (click)="add(plato)"><ion-icon  size="small" slot="icon-only" name="arrow-up"></ion-icon></ion-button>
-            <ion-button color="tertiary" fill="outline" size="small" (click)="down(plato)"><ion-icon  size="small" slot="icon-only" name="arrow-down"></ion-icon></ion-button>
-            <ion-button color="danger" fill="outline" size="small" (click)="remove(plato)"><ion-icon  size="small" slot="icon-only" name="trash"></ion-icon></ion-button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </ion-list>
+  <ion-toolbar color="tertiary" style="text-align: center;">
+    Pedido: {{precioTotal | number:'.2'}}&#8364;
+  </ion-toolbar>
+
+  <tabla-platos [pedidos]="pedidos" (addPlato)="add($event)" (subPlato)="sub($event)" (removePlato)="remove($event)"></tabla-platos>
   
   
 
