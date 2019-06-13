@@ -32,16 +32,15 @@
     <lista-platos *ngIf="showType=='Segundos'" [platos]="platos2" (OutPlato)="add($event)"></lista-platos>
     <lista-platos *ngIf="showType=='Postres'" [platos]="postres" (OutPlato)="add($event)"></lista-platos>
   </div>
-
   <ion-row>
     <ion-col>
         <ion-button text-center expand="full" color="success">Confirmar pedido</ion-button>
     </ion-col>
     <ion-col>
-        <ion-button text-center expand="full" color="dark">Añadir nuevo plato</ion-button>
+        <ion-button text-center (click)="postPlato()" expand="full" color="dark">Añadir nuevo plato</ion-button>
     </ion-col>
     <ion-col>
-        <ion-button text-center expand="full" color="danger">Cancelar</ion-button>
+        <ion-button text-center (click)="resetPedido()" expand="full" color="danger">Cancelar</ion-button>
     </ion-col>
   </ion-row>
 
