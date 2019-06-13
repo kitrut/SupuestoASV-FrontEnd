@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Plato } from './models/plato';
+import { Plato } from '../models/plato';
 import { PlatosService } from '../services/platos.service';
 import { ModalController } from '@ionic/angular';
 import { ModalCrearPlatoPage } from './modal-crear-plato/modal-crear-plato.page';

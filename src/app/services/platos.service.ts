@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Plato } from '../tab1/models/plato';
+import { Plato } from '../models/plato';
 import { Observable } from 'rxjs';
 
 const URL:string = "http://localhost:9090";

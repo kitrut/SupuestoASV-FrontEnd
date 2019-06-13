@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Plato } from '../models/plato';
+import { Plato } from '../../models/plato';
 
 @Component({
   selector: 'tabla-platos',

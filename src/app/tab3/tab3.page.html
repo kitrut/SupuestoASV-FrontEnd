@@ -1,9 +1,41 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      Tab Three
+      Mis pedidos
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <ion-row>
+    <ion-col>
+      <ion-button expand="full" color="tertiary" (click)="setFilteredItems('')">Todos</ion-button>
+    </ion-col>
+    <ion-col *ngFor="let opt of ['Emitido','Entregado','Pagado','Cancelado']">
+      <ion-button expand="full" color="tertiary" (click)="setFilteredItems(opt)">{{opt}}s</ion-button>
+    </ion-col>
+  </ion-row>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of MisPedidos">
+          <td>{{item.idPedido}}</td>
+          <td>{{item.nombreUsuario}}</td>
+          <td>{{item.fechaServicio}}</td>
+          <td>{{item.state}}</td>
+          <td>
+              <ion-button color="tertiary" fill="outline" size="small" (click)="pay(item)"><ion-icon  size="small" slot="icon-only" name="card"></ion-icon>Pagar</ion-button>
+              <ion-button color="danger" fill="outline" size="small" (click)="cancel(item)"><ion-icon  size="small" slot="icon-only" name="close"></ion-icon>Cancelar</ion-button>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+</ion-content>
