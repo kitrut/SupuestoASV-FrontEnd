@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Plato } from './models/plato';
+import { PlatosService } from '../services/platos.service';
 
 @Component({
   selector: 'app-tab1',
@@ -9,19 +10,37 @@ import { Plato } from './models/plato';
 export class Tab1Page implements OnInit{
   showType:String = "Primeros";
   empleados:String[] = ["Juan","Miguel","María"];
-  platos1:Plato[] = [{id:1,nombre:"Entremeses",precio:2.5,isChecked:false,cantidad:0},{id:2,nombre:"Ensalada de marisco",precio:2.5,isChecked:false,cantidad:0},{id:3,nombre:"Boquerones",precio:2.5,isChecked:false,cantidad:0}];
-  platos2:Plato[] = [{id:1,nombre:"Macarrones",precio:2.5,isChecked:false,cantidad:0},{id:2,nombre:"Pechuga de pollo",precio:2.5,isChecked:false,cantidad:0},{id:3,nombre:"Pescado",precio:2.5,isChecked:false,cantidad:0}];
-  postres:Plato[] = [{id:1,nombre:"Fruta",precio:2.5,isChecked:false,cantidad:0},{id:2,nombre:"Helado",precio:2.5,isChecked:false,cantidad:0},{id:3,nombre:"Tarta",precio:2.5,isChecked:false,cantidad:0}];
+  platos1:Plato[];
+  platos2:Plato[];
+  postres:Plato[];
   pedidos:Plato[] =[];
   precioTotal:number=0;
-  constructor() {}
+  constructor(private platosService:PlatosService) {}
   
   ngOnInit(){
+    this.platosService.getPlatosFromServer().subscribe(
+      data => {
+        data.map((x)=>{x.cantidad=0;return x;})
+        this.platos1 = data.filter(plato => plato.tipo=="PRIMERO");
+        this.platos2 = data.filter(plato => plato.tipo=="SEGUNDO");
+        this.postres = data.filter(plato => plato.tipo=="POSTRE");
+      }
+    )
+  }
 
+  postPlato(){
+    let p:Plato = {idPlato:null,nombre:"Langostinos",precio:10,tipo:"PRIMERO",cantidad:null};
+    this.platosService.createPlato(p).subscribe(plato =>{this.platos1.push(plato);} );
+  }
+
+  resetPedido(){
+    this.pedidos.map(plato => plato.cantidad=0);
+    this.pedidos=[];
+    this.precioTotal = 0;
   }
 
   compareFn(e1: Plato, e2: Plato): boolean {
-    return e1 && e2 ? e1.id === e2.id : e1 === e2;
+    return e1 && e2 ? e1.idPlato === e2.idPlato : e1 === e2;
   }
 
   segmentChanged(ev:any){
@@ -49,7 +68,7 @@ export class Tab1Page implements OnInit{
   remove(ev:Plato){
     this.precioTotal-=(ev.precio*ev.cantidad);
     ev.cantidad = 0;
-    let index = this.pedidos.findIndex((someone)=>{return someone.nombre==ev.nombre})
+    let index = this.pedidos.findIndex((someone)=>{return someone.idPlato==ev.idPlato})
     this.pedidos.splice(index,1);  
   }
 }
