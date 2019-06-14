@@ -4,7 +4,6 @@ import { PlatosService } from '../services/platos.service';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { LineaPedido } from '../models/linea-pedido';
-import { FormBuilder } from '@angular/forms';
 import { Pedido } from '../models/pedido';
 import { PedidosService } from '../services/pedidos.service';
 import { TipoPedido } from '../models/tipo-pedido.enum';
@@ -42,6 +41,10 @@ export class Tab1Page implements OnInit{
     this.authService.getUsuario().then(data=>{
       this.usuario = data;
     })
+  }
+
+  ionViewWillEnter(){
+    this.authService.isLoggedIn();
   }
 
   async confirmarPedido(){

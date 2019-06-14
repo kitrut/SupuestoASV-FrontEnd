@@ -3,6 +3,7 @@ import { PlatosService } from '../services/platos.service';
 import { Plato } from '../models/plato';
 import { ModalController } from '@ionic/angular';
 import { ModalCrearPlatoPage } from './modal-crear-plato/modal-crear-plato.page';
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -11,12 +12,15 @@ import { ModalCrearPlatoPage } from './modal-crear-plato/modal-crear-plato.page'
 export class Tab2Page {
   platos:Plato[];
   navSelected:string='';
-  constructor(private platoService: PlatosService,private modalController:ModalController) {
+  constructor(private platoService: PlatosService,private modalController:ModalController,private authService:AuthService) {
 
   }
 
   ngOnInit(){
     this.getData();
+  }
+  ionViewWillEnter(){
+    this.authService.isLoggedIn();
   }
 
   setFilteredItems(opt) {
