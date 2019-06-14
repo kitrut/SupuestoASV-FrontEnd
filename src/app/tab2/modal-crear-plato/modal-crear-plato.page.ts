@@ -30,12 +30,12 @@ export class ModalCrearPlatoPage implements OnInit {
   }
 
   crearPlato(){
-    let p:Plato = {idPlato:null,nombre:this.nombre,precio:this.precio,tipo:this.tipo,cantidad:null};
+    let p:Plato = {idPlato:null,nombre:this.nombre,precio:this.precio,tipo:this.tipo};
     this.platosService.createPlato(p).subscribe(plato =>{this.result = "Plato guardado con id:"+plato.idPlato+""; this.platoResult=plato;} );
   }
 
   actualizarPlato(){
-    let p:Plato = {idPlato:this.inputPlato.idPlato,nombre:this.nombre,precio:this.precio,tipo:this.tipo,cantidad:null};
+    let p:Plato = {idPlato:this.inputPlato.idPlato,nombre:this.nombre,precio:this.precio,tipo:this.tipo};
     this.platosService.updatePlato(p).subscribe(plato =>{this.result = "Plato actualizado"} );
   }
   closeModal(){

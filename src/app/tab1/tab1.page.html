@@ -18,10 +18,10 @@
         
     <ion-row>
       <ion-col>
-          <ion-button text-center (click)="confirmarPedido()" expand="full" color="success" no-margin>Confirmar</ion-button>
+          <ion-button (click)="confirmarPedido()" [disabled]="lineasPedido.length==0" expand="full" color="success" no-margin>Confirmar</ion-button>
       </ion-col>        
       <ion-col>
-          <ion-button text-center (click)="resetPedido()" expand="full" color="danger" no-margin>Cancelar</ion-button>
+          <ion-button (click)="resetPedido()" [disabled]="lineasPedido.length==0" expand="full" color="danger" no-margin>Cancelar</ion-button>
       </ion-col>
       <ion-col color="tertiary">
         <ion-button expand="full" color="danger" color="tertiary" style="text-align: center;" no-margin>
@@ -31,6 +31,7 @@
     </ion-row>
       
 </div>
-<ion-content>
-  <tabla-platos [pedidos]="pedidos" (addPlato)="add($event)" (subPlato)="sub($event)" (removePlato)="remove($event)"></tabla-platos>
+<ion-content>  
+  <tabla-platos [pedidos]="lineasPedido" (addPlato)="add($event)" (subPlato)="sub($event)" (removePlato)="remove($event)"></tabla-platos>
+  <ion-label *ngIf="lineasPedido.length==0">Esperando pedido...</ion-label>
 </ion-content>

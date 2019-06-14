@@ -3,6 +3,10 @@ import { Plato } from '../models/plato';
 import { PlatosService } from '../services/platos.service';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
+import { LineaPedido } from '../models/linea-pedido';
+import { FormBuilder } from '@angular/forms';
+import { Pedido } from '../models/pedido';
+import { PedidosService } from '../services/pedidos.service';
 
 @Component({
   selector: 'app-tab1',
@@ -15,14 +19,20 @@ export class Tab1Page implements OnInit{
   platos1:Plato[];
   platos2:Plato[];
   postres:Plato[];
-  pedidos:Plato[] =[];
+  lineasPedido:LineaPedido[] =[];
+  postInfo:String;
+
   precioTotal:number=0;
-  constructor(private platosService:PlatosService,public alertController: AlertController,private  authService:  AuthService) {}
+  constructor(
+    private platosService:PlatosService,
+    private pedidosService:PedidosService,
+    public alertController: AlertController,
+    private  authService:  AuthService
+  ) {}
   
   ngOnInit(){
     this.platosService.getPlatosFromServer().subscribe(
       data => {
-        data.map((x)=>{x.cantidad=0;return x;})
         this.platos1 = data.filter(plato => plato.tipo=="PRIMERO");
         this.platos2 = data.filter(plato => plato.tipo=="SEGUNDO");
         this.postres = data.filter(plato => plato.tipo=="POSTRE");
@@ -41,18 +51,40 @@ export class Tab1Page implements OnInit{
       buttons: [{
         text: 'Confirmar',
         handler: (blah) => {
-          console.log(this.pedidos);
+          let ped:Pedido = {state:"EMITIDO",idPedido:null,fechaServicio:null,nombreUsuario:"Manu",lineas:this.lineasPedido,total:this.precioTotal};
+          this.pedidosService.createPedido(ped).subscribe(
+            data=>{
+              alert.message = "Pedido creado ID:" + data.idPedido
+              this.confirmadoEnServer(data)
+            },
+            err=>{
+              alert.message = "Error al crear el pedido:"+err;
+              return false;
+            })          
         }
       }, 'Cerrar']
-    });
-
-    await alert.present();
-    
+    }); 
+    await alert.present();    
+  }
+  async confirmadoEnServer(data:Pedido){
+    const alert = await this.alertController.create({
+      header: 'Pedido confirmado',
+      subHeader: "ID:"+data.idPedido,
+      message: '',
+      buttons: [{
+        text: 'Cerrar',
+        handler: (blah) => {
+          this.resetPedido()
+        }
+      }]
+    }); 
+    await alert.present();    
   }
 
+
+  
   resetPedido(){
-    this.pedidos.map(plato => plato.cantidad=0);
-    this.pedidos=[];
+    this.lineasPedido=[];
     this.precioTotal = 0;
   }
 
@@ -65,27 +97,27 @@ export class Tab1Page implements OnInit{
   }
   add(ev:Plato){
     this.precioTotal+=ev.precio;
-    if(this.pedidos.includes(ev)){
-      this.pedidos.find((someone)=>{return someone.nombre==ev.nombre}).cantidad+=1;
+    let found = this.lineasPedido.find((someone)=>{return someone.nombre==ev.nombre;})
+
+    if(found != undefined){
+      found.cantidad +=1;
     }else{
-      ev.cantidad+=1;
-      this.pedidos.unshift(ev);
+      this.lineasPedido.unshift({idLineaPedido:null,cantidad:1,nombre:ev.nombre,precio:ev.precio});
     }    
   }
   sub(ev:Plato){    
-    let plato = this.pedidos.find((someone)=>{return someone.nombre==ev.nombre})
-    if(plato.cantidad <=1){
-      this.remove(ev)
+    let found = this.lineasPedido.find((someone)=>{return someone.nombre==ev.nombre})
+    if(found.cantidad <=1){
+      this.remove(found)
     }
     else{
       this.precioTotal-=ev.precio;
-      plato.cantidad-=1;
+      found.cantidad-=1;
     }
   }
-  remove(ev:Plato){
+  remove(ev:LineaPedido){
     this.precioTotal-=(ev.precio*ev.cantidad);
-    ev.cantidad = 0;
-    let index = this.pedidos.findIndex((someone)=>{return someone.idPlato==ev.idPlato})
-    this.pedidos.splice(index,1);  
+    let index = this.lineasPedido.findIndex((someone)=>{return someone.nombre==ev.nombre})
+    this.lineasPedido.splice(index,1);  
   }
 }

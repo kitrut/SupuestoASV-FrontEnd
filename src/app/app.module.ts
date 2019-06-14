@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ModalCrearPlatoPageModule } from './tab2/modal-crear-plato/modal-crear-plato.module';
 import { IonicStorageModule } from "@ionic/storage";
+import { ModalDetallePedidoPageModule } from './tab3/modal-detalle-pedido/modal-detalle-pedido.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +22,8 @@ import { IonicStorageModule } from "@ionic/storage";
     IonicStorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    ModalCrearPlatoPageModule
+    ModalCrearPlatoPageModule,
+    ModalDetallePedidoPageModule
   ],    
   providers: [
     StatusBar,
