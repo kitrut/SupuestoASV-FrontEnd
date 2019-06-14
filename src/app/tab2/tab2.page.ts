@@ -29,6 +29,16 @@ export class Tab2Page {
       }
     )
   }
+  deletePlato(id){
+    this.platoService.deletePlato(id).subscribe(
+      res =>{
+        this.getData();
+      },
+      err =>{
+        console.log("Error "+ err)
+      }
+    )
+  }
 
   async postPlato(){
     const modal = await this.modalController.create({
