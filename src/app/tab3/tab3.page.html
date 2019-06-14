@@ -20,8 +20,8 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Fecha</th>
-        <th>Hora</th>
+        <th>Creado</th>
+        <th>Entrega</th>
         <th>Estado</th>
         <th>Acciones</th>
       </tr>
@@ -30,7 +30,7 @@
       <tr *ngFor="let item of MisPedidos">
           <td>{{item.idPedido}}</td>
           <td>{{item.fechaServicio | date:'d/M/yy '}}</td>
-          <td>{{item.fechaServicio | date:'HH:MM '}}</td>
+          <td>{{item.fechaEntrega | date:'d/M/yy '}}</td>
           <td>{{item.state}}</td>
           <td>
             <ion-button color="info" fill="outline" size="small" (click)="showDetails(item)"><ion-icon size="small" slot="icon-only" name="information-circle-outline"></ion-icon></ion-button>

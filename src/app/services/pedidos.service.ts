@@ -8,6 +8,7 @@ const URL:string = "http://localhost:9090/pedidos";
   providedIn: 'root'
 })
 export class PedidosService {
+  
 
   constructor(private http: HttpClient) { }
 
@@ -23,6 +24,21 @@ export class PedidosService {
 
   createPedido(pedido:Pedido):Observable<Pedido>{
     return this.http.post<Pedido>(URL, pedido);
+  }
+
+  updatePedido(pedido:Pedido):Observable<Pedido>{
+    return this.http.put<Pedido>(URL, pedido);
+  }
+
+  cancelarPedido(pedido:Pedido) {
+    pedido.state="CANCELADO";
+    pedido.estado="CANCELADO";
+    return this.updatePedido(pedido);
+  }
+  pagarPedido(pedido:Pedido) {
+    pedido.state="PAGADO";
+    pedido.estado="PAGADO";
+    return this.updatePedido(pedido);
   }
 
   filterItems(searchTerm) {

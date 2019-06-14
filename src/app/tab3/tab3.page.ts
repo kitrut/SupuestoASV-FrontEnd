@@ -4,6 +4,7 @@ import { Pedido } from '../models/pedido';
 import { AuthService } from '../services/auth.service';
 import { ModalDetallePedidoPage } from './modal-detalle-pedido/modal-detalle-pedido.page';
 import { ModalController } from '@ionic/angular';
+import { TipoPedido } from '../models/tipo-pedido.enum';
 
 @Component({
   selector: 'app-tab3',
@@ -46,11 +47,25 @@ export class Tab3Page implements OnInit{
     await modal.present();
   }
 
-  pay(item:Pedido){
-    console.log("Pago del pedido "+item.idPedido)
+  pay(item:Pedido){    
+    this.pedidoService.pagarPedido(item).subscribe(
+      data => {
+        item.state = TipoPedido.PAGADO;
+      },
+      err =>{
+
+      }
+    )    
   }
-  cancel(item:Pedido){
-    console.log("Cancelar pedido "+item.idPedido)
+  cancel(item:Pedido){    
+    this.pedidoService.cancelarPedido(item).subscribe(
+      data => {
+        item.state=TipoPedido.CANCELADO;
+      },
+      err =>{
+        
+      }
+    )    
   }
 
   setFilteredItems(opt) {
