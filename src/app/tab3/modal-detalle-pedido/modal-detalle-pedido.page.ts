@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Pedido } from 'src/app/models/pedido';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-modal-detalle-pedido',
@@ -9,9 +10,13 @@ import { Pedido } from 'src/app/models/pedido';
 export class ModalDetallePedidoPage implements OnInit {
 
   @Input() inputPedido:Pedido;
-  constructor() { }
+  constructor(private modalController:ModalController) { }
 
   ngOnInit() {
+  }
+
+  closeModal(){
+    this.modalController.dismiss();
   }
 
 }

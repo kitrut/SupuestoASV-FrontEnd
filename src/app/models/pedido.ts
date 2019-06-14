@@ -4,9 +4,7 @@ export class Pedido {
     idPedido:number;
     nombreUsuario:String;
     fechaServicio:Date;
-    state:Estado;
-    lineas:LineaPedido[];
-}
-class Estado{
     state:String;
+    lineas:LineaPedido[];
+    total:number;
 }

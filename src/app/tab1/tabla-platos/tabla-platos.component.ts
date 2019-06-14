@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Plato } from '../../models/plato';
+import { LineaPedido } from 'src/app/models/linea-pedido';
 
 @Component({
   selector: 'tabla-platos',
@@ -8,7 +9,7 @@ import { Plato } from '../../models/plato';
 })
 export class TablaPlatosComponent implements OnInit {
 
-  @Input() public pedidos: Plato[];
+  @Input() public pedidos: LineaPedido[];
   @Output() public addPlato = new EventEmitter<Plato>();
   @Output() public subPlato = new EventEmitter<Plato>();
   @Output() public removePlato = new EventEmitter<Plato>();

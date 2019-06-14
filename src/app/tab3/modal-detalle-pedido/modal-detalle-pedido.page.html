@@ -6,6 +6,10 @@
 
 <ion-content>
   <ion-list>
+    <ion-list-header >
+      <div text-center>Total: {{inputPedido.total | number:'.2'}}&#8364;</div>
+      
+    </ion-list-header>
       <ion-item color="tertiary">
           <ion-col expand="full" size="4"><ion-label>Nombre</ion-label></ion-col>
           <ion-col expand="full" size="2">Uds</ion-col>
@@ -20,3 +24,6 @@
       </ion-item>
   </ion-list>  
 </ion-content>
+<ion-footer>
+  <ion-button expand="full" (click)="closeModal()" color="danger">Cerrar</ion-button>
+</ion-footer>

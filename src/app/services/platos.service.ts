@@ -27,7 +27,7 @@ export class PlatosService {
   }
 
   updatePlato(plato: Plato):Observable<Plato> {
-    return this.http.put<Plato>(URL, {idPlato:plato.idPlato,nombre:plato.nombre,precio:plato.precio,tipo:plato.tipo});
+    return this.http.put<Plato>(URL, plato);
   }
 
   deletePlato(id:number):Observable<any>{
