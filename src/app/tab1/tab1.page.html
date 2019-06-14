@@ -15,17 +15,10 @@
     <lista-platos *ngIf="showType=='Primeros'" [platos]="platos1" (OutPlato)="add($event)"></lista-platos>
     <lista-platos *ngIf="showType=='Segundos'" [platos]="platos2" (OutPlato)="add($event)"></lista-platos>
     <lista-platos *ngIf="showType=='Postres'" [platos]="postres" (OutPlato)="add($event)"></lista-platos>
-
-    <ion-item no-padding>
-      <ion-label>Atendido por: </ion-label>
-      <ion-select placeholder="Select One">
-        <ion-select-option *ngFor="let empleado of empleados" value="{{empleado}}">{{empleado}}</ion-select-option>
-      </ion-select>
-    </ion-item>
         
     <ion-row>
       <ion-col>
-          <ion-button text-center expand="full" color="success" no-margin>Confirmar</ion-button>
+          <ion-button text-center (click)="confirmarPedido()" expand="full" color="success" no-margin>Confirmar</ion-button>
       </ion-col>        
       <ion-col>
           <ion-button text-center (click)="resetPedido()" expand="full" color="danger" no-margin>Cancelar</ion-button>
@@ -39,7 +32,5 @@
       
 </div>
 <ion-content>
-  
-
   <tabla-platos [pedidos]="pedidos" (addPlato)="add($event)" (subPlato)="sub($event)" (removePlato)="remove($event)"></tabla-platos>
 </ion-content>

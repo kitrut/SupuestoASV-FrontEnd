@@ -20,7 +20,6 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Nombre</th>
         <th>Fecha</th>
         <th>Hora</th>
         <th>Estado</th>
@@ -30,7 +29,6 @@
     <tbody>
       <tr *ngFor="let item of MisPedidos">
           <td>{{item.idPedido}}</td>
-          <td>{{item.nombreUsuario}}</td>
           <td>{{item.fechaServicio | date:'d/M/yy '}}</td>
           <td>{{item.fechaServicio | date:'HH:MM '}}</td>
           <td>{{item.state}}</td>

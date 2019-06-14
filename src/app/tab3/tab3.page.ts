@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidosService } from '../services/pedidos.service';
 import { Pedido } from '../models/pedido';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-tab3',
@@ -10,16 +11,26 @@ import { Pedido } from '../models/pedido';
 export class Tab3Page implements OnInit{
   
 
-  constructor(private pedidoService:PedidosService) {}
+  constructor(private pedidoService:PedidosService,private  authService:  AuthService) {}
   MisPedidos:Pedido[];
   public searchTerm: string = "";
 
   ngOnInit(): void {
-    this.pedidoService.getPedidosFromServer('Juan').subscribe(
-      data => {
-        this.MisPedidos=data;
-      }
-    )
+    
+  }
+
+  ionViewWillEnter(){
+    this.authService.getUsuario().then(data=>{
+      this.pedidoService.getPedidosFromServer(data).subscribe(
+        data => {
+          this.MisPedidos=data;
+        }
+      )    
+    },
+    err=>{
+      console.error("Error al pedir los pedidos")
+    })
+    
   }
 
   pay(item:Pedido){
