@@ -17,6 +17,7 @@ export class ModalCrearPlatoPage implements OnInit {
   tipo:String;
 
   result:String;
+  platoResult:Plato
 
 
   ngOnInit() {
@@ -24,7 +25,7 @@ export class ModalCrearPlatoPage implements OnInit {
 
   crearPlato(){
     let p:Plato = {idPlato:null,nombre:this.nombre,precio:this.precio,tipo:this.tipo,cantidad:null};
-    this.platosService.createPlato(p).subscribe(plato =>{this.result = "Plato guardado con id:"+plato.idPlato+"";} );
+    this.platosService.createPlato(p).subscribe(plato =>{this.result = "Plato guardado con id:"+plato.idPlato+""; this.platoResult=plato;} );
   }
   closeModal(){
     this.modalController.dismiss();

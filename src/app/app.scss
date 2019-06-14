@@ -4,3 +4,24 @@
 // styles are for the entire app and not just one component. Additionally, this 
 // file can hold Sass mixins, functions, and placeholder classes to be imported 
 // and used throughout the application.
+
+table { 
+    width: 100%; 
+    table-layout: fixed;
+    border-collapse: collapse; 
+}
+
+/* Zebra striping */
+tr:nth-of-type(odd) { 
+background: #eee; 
+}
+th { 
+  background: #7044ff;
+  font-weight: bold; 
+  color: white;
+}
+td, th { 
+  padding: 6px; 
+  border: 1px solid #ccc; 
+  text-align: center; 
+}
