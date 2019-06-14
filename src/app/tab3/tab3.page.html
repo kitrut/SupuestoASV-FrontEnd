@@ -8,10 +8,10 @@
 <div slot="fixed">
     <ion-row>
         <ion-col>
-          <ion-button expand="full" color="tertiary" (click)="setFilteredItems('')">Todos</ion-button>
+          <ion-button expand="full" color="tertiary" (click)="setFilteredItems('')" no-margin>Todos</ion-button>
         </ion-col>
         <ion-col *ngFor="let opt of ['Emitido','Entregado','Pagado','Cancelado']">
-          <ion-button expand="full" color="tertiary" (click)="setFilteredItems(opt)">{{opt}}s</ion-button>
+          <ion-button expand="full" color="tertiary" (click)="setFilteredItems(opt)" no-margin>{{opt}}s</ion-button>
         </ion-col>
       </ion-row>
   </div>

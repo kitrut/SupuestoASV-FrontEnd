@@ -38,8 +38,8 @@ export class Tab1Page implements OnInit{
     return e1 && e2 ? e1.idPlato === e2.idPlato : e1 === e2;
   }
 
-  segmentChanged(ev:any){
-    this.showType = ev.detail.value;
+  navChange(seleccion){
+    this.showType = seleccion;
   }
   add(ev:Plato){
     this.precioTotal+=ev.precio;

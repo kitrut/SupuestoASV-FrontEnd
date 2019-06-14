@@ -8,14 +8,17 @@
 <div slot="fixed">
   <ion-row>
     <ion-col>
-      <ion-button expand="full" color="tertiary" (click)="setFilteredItems('')">Todos</ion-button>
+      <ion-button expand="full" color="tertiary" (click)="setFilteredItems('')" no-margin>Todos</ion-button>
     </ion-col>
     <ion-col *ngFor="let opt of ['PRIMERO','SEGUNDO','POSTRE']">
-      <ion-button expand="full" color="tertiary" (click)="setFilteredItems(opt)">{{opt}}s</ion-button>
+      <ion-button expand="full" color="tertiary" (click)="setFilteredItems(opt)" no-margin>{{opt}}s</ion-button>
     </ion-col>
   </ion-row>
-
-  <ion-button text-center (click)="postPlato()" expand="full" color="success">Añadir nuevo plato</ion-button>
+  <ion-row>
+    <ion-col>
+        <ion-button text-center (click)="postPlato()" expand="full" color="success"no-margin>Añadir nuevo plato</ion-button>
+    </ion-col>
+  </ion-row> 
 </div>
 <ion-content>
   <table>
