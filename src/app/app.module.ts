@@ -10,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ModalCrearPlatoPageModule } from './tab2/modal-crear-plato/modal-crear-plato.module';
+import { IonicStorageModule } from "@ionic/storage";
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { ModalCrearPlatoPageModule } from './tab2/modal-crear-plato/modal-crear-
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
     ModalCrearPlatoPageModule

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Plato } from '../models/plato';
 import { PlatosService } from '../services/platos.service';
+import { AlertController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-tab1',
@@ -8,14 +10,14 @@ import { PlatosService } from '../services/platos.service';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit{
+  usuario:String;
   showType:String = "Primeros";
-  empleados:String[] = ["Juan","Miguel","María"];
   platos1:Plato[];
   platos2:Plato[];
   postres:Plato[];
   pedidos:Plato[] =[];
   precioTotal:number=0;
-  constructor(private platosService:PlatosService,) {}
+  constructor(private platosService:PlatosService,public alertController: AlertController,private  authService:  AuthService) {}
   
   ngOnInit(){
     this.platosService.getPlatosFromServer().subscribe(
@@ -26,6 +28,26 @@ export class Tab1Page implements OnInit{
         this.postres = data.filter(plato => plato.tipo=="POSTRE");
       }
     )
+    this.authService.getUsuario().then(data=>{
+      this.usuario = data;
+    })
+  }
+
+  async confirmarPedido(){
+    const alert = await this.alertController.create({
+      header: 'Confirmar pedido',
+      subHeader: 'Camarero/a: '+this.usuario,
+      message: '',
+      buttons: [{
+        text: 'Confirmar',
+        handler: (blah) => {
+          console.log(this.pedidos);
+        }
+      }, 'Cerrar']
+    });
+
+    await alert.present();
+    
   }
 
   resetPedido(){
