@@ -16,6 +16,7 @@ export class Tab3Page implements OnInit{
 
   constructor(private pedidoService:PedidosService,private  authService:  AuthService,private modalController:ModalController) {}
   MisPedidos:Pedido[];
+  navSelected:string='';
   public searchTerm: string = "";
 
   ngOnInit(): void {
@@ -69,6 +70,7 @@ export class Tab3Page implements OnInit{
   }
 
   setFilteredItems(opt) {
+    this.navSelected=opt;
     this.MisPedidos = this.pedidoService.filterItems(opt);
   }
 

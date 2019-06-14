@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { ModalCrearPlatoPageModule } from './tab2/modal-crear-plato/modal-crear-plato.module';
 import { IonicStorageModule } from "@ionic/storage";
 import { ModalDetallePedidoPageModule } from './tab3/modal-detalle-pedido/modal-detalle-pedido.module';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,4 +33,10 @@ import { ModalDetallePedidoPageModule } from './tab3/modal-detalle-pedido/modal-
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private authService:AuthService){}
+  
+  ngOnInit(): void {
+    this.authService.isLoggedIn();
+  }
+}
