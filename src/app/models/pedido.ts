@@ -5,6 +5,7 @@ export class Pedido {
     nombreUsuario:String;
     fechaServicio:Date;
     state:String;
+    estado:String;
     lineas:LineaPedido[];
     total:number;
 }

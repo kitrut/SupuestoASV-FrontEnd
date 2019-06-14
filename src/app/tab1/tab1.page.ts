@@ -7,6 +7,7 @@ import { LineaPedido } from '../models/linea-pedido';
 import { FormBuilder } from '@angular/forms';
 import { Pedido } from '../models/pedido';
 import { PedidosService } from '../services/pedidos.service';
+import { TipoPedido } from '../models/tipo-pedido.enum';
 
 @Component({
   selector: 'app-tab1',
@@ -51,7 +52,7 @@ export class Tab1Page implements OnInit{
       buttons: [{
         text: 'Confirmar',
         handler: (blah) => {
-          let ped:Pedido = {state:"EMITIDO",idPedido:null,fechaServicio:null,nombreUsuario:"Manu",lineas:this.lineasPedido,total:this.precioTotal};
+          let ped:Pedido = {state:TipoPedido.EMITIDO,estado:TipoPedido.EMITIDO,idPedido:null,fechaServicio:null,nombreUsuario:"Manu",lineas:this.lineasPedido,total:this.precioTotal};
           this.pedidosService.createPedido(ped).subscribe(
             data=>{
               alert.message = "Pedido creado ID:" + data.idPedido

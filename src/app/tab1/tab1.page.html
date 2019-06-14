@@ -15,7 +15,7 @@
     <lista-platos *ngIf="showType=='Primeros'" [platos]="platos1" (OutPlato)="add($event)"></lista-platos>
     <lista-platos *ngIf="showType=='Segundos'" [platos]="platos2" (OutPlato)="add($event)"></lista-platos>
     <lista-platos *ngIf="showType=='Postres'" [platos]="postres" (OutPlato)="add($event)"></lista-platos>
-        
+  
     <ion-row>
       <ion-col>
           <ion-button (click)="confirmarPedido()" [disabled]="lineasPedido.length==0" expand="full" color="success" no-margin>Confirmar</ion-button>
@@ -24,7 +24,7 @@
           <ion-button (click)="resetPedido()" [disabled]="lineasPedido.length==0" expand="full" color="danger" no-margin>Cancelar</ion-button>
       </ion-col>
       <ion-col color="tertiary">
-        <ion-button expand="full" color="danger" color="tertiary" style="text-align: center;" no-margin>
+        <ion-button expand="full" color="danger" color="tertiary" no-margin>
           {{precioTotal | number:'.2'}}&#8364;
         </ion-button>
       </ion-col>
@@ -34,4 +34,5 @@
 <ion-content>  
   <tabla-platos [pedidos]="lineasPedido" (addPlato)="add($event)" (subPlato)="sub($event)" (removePlato)="remove($event)"></tabla-platos>
   <ion-label *ngIf="lineasPedido.length==0">Esperando pedido...</ion-label>
+  {{myDate}}
 </ion-content>
