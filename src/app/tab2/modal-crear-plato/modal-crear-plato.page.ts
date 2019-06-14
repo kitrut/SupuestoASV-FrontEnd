@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Plato } from '../../models/plato';
 import { PlatosService } from 'src/app/services/platos.service';
@@ -9,6 +9,7 @@ import { PlatosService } from 'src/app/services/platos.service';
   styleUrls: ['./modal-crear-plato.page.scss'],
 })
 export class ModalCrearPlatoPage implements OnInit {
+  @Input() inputPlato:Plato;
 
   constructor(private modalController:ModalController,private platosService:PlatosService) { }
 
@@ -17,14 +18,25 @@ export class ModalCrearPlatoPage implements OnInit {
   tipo:String;
 
   result:String;
+  platoResult:Plato
 
 
   ngOnInit() {
+    if(this.inputPlato != undefined){
+      this.precio = this.inputPlato.precio;
+      this.tipo = this.inputPlato.tipo;
+      this.nombre = this.inputPlato.nombre;
+    }
   }
 
   crearPlato(){
     let p:Plato = {idPlato:null,nombre:this.nombre,precio:this.precio,tipo:this.tipo,cantidad:null};
-    this.platosService.createPlato(p).subscribe(plato =>{this.result = "Plato guardado con id:"+plato.idPlato+"";} );
+    this.platosService.createPlato(p).subscribe(plato =>{this.result = "Plato guardado con id:"+plato.idPlato+""; this.platoResult=plato;} );
+  }
+
+  actualizarPlato(){
+    let p:Plato = {idPlato:this.inputPlato.idPlato,nombre:this.nombre,precio:this.precio,tipo:this.tipo,cantidad:null};
+    this.platosService.updatePlato(p).subscribe(plato =>{this.result = "Plato actualizado"} );
   }
   closeModal(){
     this.modalController.dismiss();

@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Crear un plato</ion-title>
+    <ion-title *ngIf="inputPlato == undefined">Crear un plato</ion-title>
+    <ion-title *ngIf="inputPlato != undefined">Actualizar un plato</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -27,7 +28,10 @@
 </ion-content>
 <ion-footer>
   <ion-row>
-    <ion-col><ion-button expand="full" (click)="crearPlato()" color="success">Crear</ion-button></ion-col>
-    <ion-col><ion-button expand="full" (click)="closeModal()" color="danger">close</ion-button></ion-col>
+    <ion-col>
+      <ion-button *ngIf="inputPlato == undefined" expand="full" (click)="crearPlato()" color="success">Crear</ion-button>
+      <ion-button *ngIf="inputPlato != undefined" expand="full" (click)="actualizarPlato()" color="success">Actualizar</ion-button>
+    </ion-col>
+    <ion-col><ion-button expand="full" (click)="closeModal()" color="danger">Cerrar</ion-button></ion-col>
   </ion-row>    
 </ion-footer>

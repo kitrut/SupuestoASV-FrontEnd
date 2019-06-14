@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Plato } from '../models/plato';
 import { PlatosService } from '../services/platos.service';
-import { ModalController } from '@ionic/angular';
-import { ModalCrearPlatoPage } from './modal-crear-plato/modal-crear-plato.page';
 
 @Component({
   selector: 'app-tab1',
@@ -17,7 +15,7 @@ export class Tab1Page implements OnInit{
   postres:Plato[];
   pedidos:Plato[] =[];
   precioTotal:number=0;
-  constructor(private platosService:PlatosService,private modalController:ModalController) {}
+  constructor(private platosService:PlatosService,) {}
   
   ngOnInit(){
     this.platosService.getPlatosFromServer().subscribe(
@@ -30,17 +28,6 @@ export class Tab1Page implements OnInit{
     )
   }
 
-  async postPlato(){
-    const modal = await this.modalController.create({
-      component: ModalCrearPlatoPage,
-      cssClass:'mymodal',
-      componentProps:{
-        publicacion : ""        
-      }
-    });
-    return await modal.present();
-  }
-
   resetPedido(){
     this.pedidos.map(plato => plato.cantidad=0);
     this.pedidos=[];
@@ -51,8 +38,8 @@ export class Tab1Page implements OnInit{
     return e1 && e2 ? e1.idPlato === e2.idPlato : e1 === e2;
   }
 
-  segmentChanged(ev:any){
-    this.showType = ev.detail.value;
+  navChange(seleccion){
+    this.showType = seleccion;
   }
   add(ev:Plato){
     this.precioTotal+=ev.precio;

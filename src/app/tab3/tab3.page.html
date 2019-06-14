@@ -5,22 +5,24 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
-  <ion-row>
-    <ion-col>
-      <ion-button expand="full" color="tertiary" (click)="setFilteredItems('')">Todos</ion-button>
-    </ion-col>
-    <ion-col *ngFor="let opt of ['Emitido','Entregado','Pagado','Cancelado']">
-      <ion-button expand="full" color="tertiary" (click)="setFilteredItems(opt)">{{opt}}s</ion-button>
-    </ion-col>
-  </ion-row>
+<div slot="fixed">
+    <ion-row>
+        <ion-col>
+          <ion-button expand="full" color="tertiary" (click)="setFilteredItems('')" no-margin>Todos</ion-button>
+        </ion-col>
+        <ion-col *ngFor="let opt of ['Emitido','Entregado','Pagado','Cancelado']">
+          <ion-button expand="full" color="tertiary" (click)="setFilteredItems(opt)" no-margin>{{opt}}s</ion-button>
+        </ion-col>
+      </ion-row>
+  </div>
+<ion-content>  
   <table>
     <thead>
       <tr>
         <th>ID</th>
         <th>Nombre</th>
         <th>Fecha</th>
+        <th>Hora</th>
         <th>Estado</th>
         <th>Acciones</th>
       </tr>
@@ -29,11 +31,13 @@
       <tr *ngFor="let item of MisPedidos">
           <td>{{item.idPedido}}</td>
           <td>{{item.nombreUsuario}}</td>
-          <td>{{item.fechaServicio}}</td>
+          <td>{{item.fechaServicio | date:'d/M/yy '}}</td>
+          <td>{{item.fechaServicio | date:'HH:MM '}}</td>
           <td>{{item.state}}</td>
           <td>
-              <ion-button color="tertiary" fill="outline" size="small" (click)="pay(item)"><ion-icon  size="small" slot="icon-only" name="card"></ion-icon>Pagar</ion-button>
-              <ion-button color="danger" fill="outline" size="small" (click)="cancel(item)"><ion-icon  size="small" slot="icon-only" name="close"></ion-icon>Cancelar</ion-button>
+            <ion-button color="danger" fill="outline" size="small" disabled="true"><ion-icon size="small" slot="icon-only" name="information-circle-outline"></ion-icon></ion-button>
+            <ion-button *ngIf="item.state=='ENTREGADO'" color="tertiary" fill="outline" size="small" (click)="pay(item)"><ion-icon  size="small" slot="icon-only" name="card"></ion-icon></ion-button>
+            <ion-button *ngIf="item.state=='EMITIDO'" color="danger" fill="outline" size="small" (click)="cancel(item)"><ion-icon  size="small" slot="icon-only" name="close"></ion-icon></ion-button>  
           </td>
       </tr>
     </tbody>

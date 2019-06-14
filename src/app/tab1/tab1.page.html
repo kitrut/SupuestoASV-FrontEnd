@@ -5,51 +5,41 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
+<div slot="fixed">
+    <ion-row style="padding: 0 !important;">
+        <ion-col *ngFor="let opt of ['Primeros','Segundos','Postres']">
+          <ion-button expand="full" color="tertiary" (click)="navChange(opt)" no-margin>{{opt}}</ion-button>
+        </ion-col>
+    </ion-row>
 
-<ion-content>
-
-  <ion-item no-padding>
-    <ion-label>Atendido por: </ion-label>
-    <ion-select placeholder="Select One">
-      <ion-select-option *ngFor="let empleado of empleados" value="{{empleado}}">{{empleado}}</ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-segment (ionChange)="segmentChanged($event)" value="Primeros" color="tertiary">
-    <ion-segment-button value="Primeros">
-      Primeros
-    </ion-segment-button>
-    <ion-segment-button value="Segundos">
-      Segundos
-    </ion-segment-button>
-    <ion-segment-button value="Postres">
-      Postres
-    </ion-segment-button>
-  </ion-segment>
-
-  <div text-center>
     <lista-platos *ngIf="showType=='Primeros'" [platos]="platos1" (OutPlato)="add($event)"></lista-platos>
     <lista-platos *ngIf="showType=='Segundos'" [platos]="platos2" (OutPlato)="add($event)"></lista-platos>
     <lista-platos *ngIf="showType=='Postres'" [platos]="postres" (OutPlato)="add($event)"></lista-platos>
-  </div>
-  <ion-row>
-    <ion-col>
-        <ion-button text-center expand="full" color="success">Confirmar pedido</ion-button>
-    </ion-col>
-    <ion-col>
-        <ion-button text-center (click)="postPlato()" expand="full" color="dark">Añadir nuevo plato</ion-button>
-    </ion-col>
-    <ion-col>
-        <ion-button text-center (click)="resetPedido()" expand="full" color="danger">Cancelar</ion-button>
-    </ion-col>
-  </ion-row>
 
-  <ion-toolbar color="tertiary" style="text-align: center;">
-    Pedido: {{precioTotal | number:'.2'}}&#8364;
-  </ion-toolbar>
+    <ion-item no-padding>
+      <ion-label>Atendido por: </ion-label>
+      <ion-select placeholder="Select One">
+        <ion-select-option *ngFor="let empleado of empleados" value="{{empleado}}">{{empleado}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+        
+    <ion-row>
+      <ion-col>
+          <ion-button text-center expand="full" color="success" no-margin>Confirmar</ion-button>
+      </ion-col>        
+      <ion-col>
+          <ion-button text-center (click)="resetPedido()" expand="full" color="danger" no-margin>Cancelar</ion-button>
+      </ion-col>
+      <ion-col color="tertiary">
+        <ion-button expand="full" color="danger" color="tertiary" style="text-align: center;" no-margin>
+          {{precioTotal | number:'.2'}}&#8364;
+        </ion-button>
+      </ion-col>
+    </ion-row>
+      
+</div>
+<ion-content>
+  
 
   <tabla-platos [pedidos]="pedidos" (addPlato)="add($event)" (subPlato)="sub($event)" (removePlato)="remove($event)"></tabla-platos>
-  
-  
-
 </ion-content>

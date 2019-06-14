@@ -9,7 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ModalCrearPlatoPageModule } from './tab1/modal-crear-plato/modal-crear-plato.module';
+import { ModalCrearPlatoPageModule } from './tab2/modal-crear-plato/modal-crear-plato.module';
 
 @NgModule({
   declarations: [AppComponent],
