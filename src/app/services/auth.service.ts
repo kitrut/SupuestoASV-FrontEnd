@@ -30,10 +30,8 @@ export class AuthService {
   isLoggedIn(){
     this.storage.get("Atendiendo").then(
       data=>{
-        if(data!=null){
+        if(data==null){
           this.router.navigateByUrl('');
-        }else{
-          this.router.navigateByUrl('tabs');
         }
       }
     )

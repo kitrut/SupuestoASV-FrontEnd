@@ -24,6 +24,7 @@ export class Tab3Page implements OnInit{
   }
 
   ionViewWillEnter(){
+    this.authService.isLoggedIn();
     this.authService.getUsuario().then(data=>{
       this.pedidoService.getPedidosFromServer(data).subscribe(
         data => {
