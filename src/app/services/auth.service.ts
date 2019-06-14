@@ -27,7 +27,15 @@ export class AuthService {
     this.router.navigateByUrl('');
   }
 
-  isLoggedIn():Boolean{
-    return true;
+  isLoggedIn(){
+    this.storage.get("Atendiendo").then(
+      data=>{
+        if(data!=null){
+          this.router.navigateByUrl('');
+        }else{
+          this.router.navigateByUrl('tabs');
+        }
+      }
+    )
   }
 }

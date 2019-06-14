@@ -10,6 +10,7 @@ import { ModalCrearPlatoPage } from './modal-crear-plato/modal-crear-plato.page'
 })
 export class Tab2Page {
   platos:Plato[];
+  navSelected:string='';
   constructor(private platoService: PlatosService,private modalController:ModalController) {
 
   }
@@ -19,6 +20,7 @@ export class Tab2Page {
   }
 
   setFilteredItems(opt) {
+    this.navSelected=opt;
     this.platos = this.platoService.filterItems(opt);
   }
 
