@@ -33,7 +33,7 @@
           <td>{{item.fechaServicio | date:'HH:MM '}}</td>
           <td>{{item.state}}</td>
           <td>
-            <ion-button color="danger" fill="outline" size="small" disabled="true"><ion-icon size="small" slot="icon-only" name="information-circle-outline"></ion-icon></ion-button>
+            <ion-button color="info" fill="outline" size="small" (click)="showDetails(item)"><ion-icon size="small" slot="icon-only" name="information-circle-outline"></ion-icon></ion-button>
             <ion-button *ngIf="item.state=='ENTREGADO'" color="tertiary" fill="outline" size="small" (click)="pay(item)"><ion-icon  size="small" slot="icon-only" name="card"></ion-icon></ion-button>
             <ion-button *ngIf="item.state=='EMITIDO'" color="danger" fill="outline" size="small" (click)="cancel(item)"><ion-icon  size="small" slot="icon-only" name="close"></ion-icon></ion-button>  
           </td>

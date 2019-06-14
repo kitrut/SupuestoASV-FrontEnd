@@ -31,6 +31,7 @@
     </ion-row>
       
 </div>
-<ion-content>
+<ion-content>  
   <tabla-platos [pedidos]="pedidos" (addPlato)="add($event)" (subPlato)="sub($event)" (removePlato)="remove($event)"></tabla-platos>
+  <ion-label *ngIf="pedidos.length==0">Esperando pedido...</ion-label>
 </ion-content>

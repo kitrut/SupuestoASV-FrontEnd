@@ -1,6 +1,6 @@
 <ion-row align-items-center>
     <ion-col *ngFor="let plato of platos" >
-        <ion-button  expand="full" size="small" (click)="addPlato(plato)" no-margin>{{plato.nombre}}</ion-button>
+        <ion-button  expand="full" (click)="addPlato(plato)" no-margin>{{plato.nombre}}</ion-button>
     </ion-col>
 </ion-row>
         
