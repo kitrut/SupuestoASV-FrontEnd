@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { PlatosService } from '../services/platos.service';
 import { Plato } from '../models/plato';
 import { ModalController } from '@ionic/angular';
-import { ModalCrearPlatoPage } from '../tab1/modal-crear-plato/modal-crear-plato.page';
+import { ModalCrearPlatoPage } from './modal-crear-plato/modal-crear-plato.page';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -43,9 +43,18 @@ export class Tab2Page {
   async postPlato(){
     const modal = await this.modalController.create({
       component: ModalCrearPlatoPage,
+      cssClass:'mymodal'
+    });
+    await modal.present();
+    await modal.onDidDismiss(); this.getData();
+  }
+
+  async showModalUpdate(plato:Plato){
+    const modal = await this.modalController.create({
+      component: ModalCrearPlatoPage,
       cssClass:'mymodal',
       componentProps:{
-        publicacion : ""        
+        inputPlato : plato        
       }
     });
     await modal.present();

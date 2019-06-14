@@ -11,7 +11,7 @@ import { AbrevPipe } from '../pipes/abrev.pipe';
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: Tab2Page }])
+    RouterModule.forChild([{ path: '', component: Tab2Page }]),
   ],
   declarations: [Tab2Page,AbrevPipe]
 })

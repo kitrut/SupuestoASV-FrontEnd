@@ -11,6 +11,7 @@ const URL:string = "http://localhost:9090/platos";
 export class PlatosService {
   
   
+  
   constructor(private http: HttpClient) { }
   misPlatos:Plato[];
   getPlatosFromServer():Observable<Plato[]>{
@@ -23,6 +24,10 @@ export class PlatosService {
 
   createPlato(plato:Plato):Observable<Plato>{
     return this.http.post<Plato>(URL, {nombre:plato.nombre,precio:plato.precio,tipo:plato.tipo});
+  }
+
+  updatePlato(plato: Plato):Observable<Plato> {
+    return this.http.put<Plato>(URL, {idPlato:plato.idPlato,nombre:plato.nombre,precio:plato.precio,tipo:plato.tipo});
   }
 
   deletePlato(id:number):Observable<any>{
