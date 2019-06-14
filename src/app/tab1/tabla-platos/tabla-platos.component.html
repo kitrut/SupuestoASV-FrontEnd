@@ -1,0 +1,24 @@
+<table>
+  <thead>
+    <tr >
+      <th>Plato</th>
+      <th>Uds.</th>
+      <th>&#8364;/ud</th>
+      <th>Total</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let plato of pedidos">
+      <td>{{plato.nombre}}</td>
+      <td>{{plato.cantidad}}</td>
+      <td>{{plato.precio | number:'.2'}}</td>
+      <td>{{(plato.precio * plato.cantidad)| number:'.2'}}</td>
+      <td>
+        <ion-button color="tertiary" fill="outline" size="small" (click)="add(plato)"><ion-icon  size="small" slot="icon-only" name="arrow-up"></ion-icon></ion-button>
+        <ion-button color="tertiary" fill="outline" size="small" (click)="sub(plato)"><ion-icon  size="small" slot="icon-only" name="arrow-down"></ion-icon></ion-button>
+        <ion-button color="danger" fill="outline" size="small" (click)="remove(plato)"><ion-icon  size="small" slot="icon-only" name="trash"></ion-icon></ion-button>
+      </td>
+    </tr>
+  </tbody>
+</table>

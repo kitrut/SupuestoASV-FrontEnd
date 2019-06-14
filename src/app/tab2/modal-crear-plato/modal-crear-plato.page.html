@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="inputPlato == undefined">Crear un plato</ion-title>
+    <ion-title *ngIf="inputPlato != undefined">Actualizar un plato</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item>
+    <ion-label>Selecciona el tipo de plato:</ion-label>
+    <ion-select placeholder="Elige uno" [(ngModel)]="tipo">
+      <ion-select-option value="PRIMERO">1º Plato</ion-select-option>
+      <ion-select-option value="SEGUNDO">2º Plato</ion-select-option>
+      <ion-select-option value="POSTRE">Postre</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Nombre:</ion-label>
+    <ion-input [(ngModel)]="nombre" type="text" clear-input minlength="2" placeholder="Macarrones"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Precio:</ion-label>
+    <ion-input [(ngModel)]="precio" type="number" min="0" placeholder="3.50"></ion-input>
+  </ion-item>
+
+  <ion-label>{{result}}</ion-label>
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col>
+      <ion-button *ngIf="inputPlato == undefined" expand="full" (click)="crearPlato()" color="success">Crear</ion-button>
+      <ion-button *ngIf="inputPlato != undefined" expand="full" (click)="actualizarPlato()" color="success">Actualizar</ion-button>
+    </ion-col>
+    <ion-col><ion-button expand="full" (click)="closeModal()" color="danger">Cerrar</ion-button></ion-col>
+  </ion-row>    
+</ion-footer>

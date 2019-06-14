@@ -1,9 +1,45 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Tab Three
+      Mis pedidos
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content></ion-content>
+<div slot="fixed">
+    <ion-row>
+        <ion-col>
+          <ion-button *ngIf="navSelected==''" expand="full" color="dark" (click)="setFilteredItems('')" no-margin>Todos</ion-button>
+          <ion-button *ngIf="navSelected!=''" expand="full" color="tertiary" (click)="setFilteredItems('')" no-margin>Todos</ion-button>
+        </ion-col>
+        <ion-col *ngFor="let opt of ['Emitido','Entregado','Pagado','Cancelado']">
+          <ion-button *ngIf="navSelected==opt" expand="full" color="dark" (click)="setFilteredItems(opt)" no-margin>{{opt}}s</ion-button>
+          <ion-button *ngIf="navSelected!=opt" expand="full" color="tertiary" (click)="setFilteredItems(opt)" no-margin>{{opt}}s</ion-button>
+        </ion-col>
+      </ion-row>
+  </div>
+<ion-content>  
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Creado</th>
+        <th>Entrega</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of MisPedidos">
+          <td>{{item.idPedido}}</td>
+          <td>{{item.fechaServicio | date:'d/M/yy '}}</td>
+          <td>{{item.fechaEntrega | date:'d/M/yy '}}</td>
+          <td>{{item.state}}</td>
+          <td>
+            <ion-button color="info" fill="outline" size="small" (click)="showDetails(item)"><ion-icon size="small" slot="icon-only" name="information-circle-outline"></ion-icon></ion-button>
+            <ion-button *ngIf="item.state=='ENTREGADO'" color="tertiary" fill="outline" size="small" (click)="pay(item)"><ion-icon  size="small" slot="icon-only" name="card"></ion-icon></ion-button>
+            <ion-button *ngIf="item.state=='EMITIDO'" color="danger" fill="outline" size="small" (click)="cancel(item)"><ion-icon  size="small" slot="icon-only" name="close"></ion-icon></ion-button>  
+          </td>
+      </tr>
+    </tbody>
+  </table>
+</ion-content>
