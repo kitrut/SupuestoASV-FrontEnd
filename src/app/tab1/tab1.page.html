@@ -3,37 +3,34 @@
     <ion-title>
       Crear pedido
     </ion-title>
+    <ion-segment scrollable="true" (ionChange)="navChange($event)" value={{opciones[0]}}>
+        <ion-segment-button *ngFor="let aux of opciones" value="{{aux}}">
+          <ion-label>{{aux}}</ion-label>
+        </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 <div slot="fixed">
-    <ion-row style="padding: 0 !important;">
-        <ion-col *ngFor="let opt of ['Primeros','Segundos','Postres']">
-          <ion-button *ngIf="showType==opt" expand="full" color="dark" (click)="navChange(opt)" no-margin>{{opt}}</ion-button>
-          <ion-button *ngIf="showType!=opt" expand="full" color="tertiary" (click)="navChange(opt)" no-margin>{{opt}}</ion-button>
-        </ion-col>
-    </ion-row>
-
-    <lista-platos *ngIf="showType=='Primeros'" [platos]="platos1" (OutPlato)="add($event)"></lista-platos>
-    <lista-platos *ngIf="showType=='Segundos'" [platos]="platos2" (OutPlato)="add($event)"></lista-platos>
-    <lista-platos *ngIf="showType=='Postres'" [platos]="postres" (OutPlato)="add($event)"></lista-platos>
-  
-    <ion-row>
-      <ion-col>
-          <ion-button (click)="confirmarPedido()" [disabled]="lineasPedido.length==0" expand="full" color="success" no-margin>Confirmar</ion-button>
-      </ion-col>        
-      <ion-col>
-          <ion-button (click)="resetPedido()" [disabled]="lineasPedido.length==0" expand="full" color="danger" no-margin>Cancelar</ion-button>
-      </ion-col>
-      <ion-col color="tertiary">
-        <ion-button expand="full" color="danger" color="tertiary" no-margin>
-          {{precioTotal | number:'.2'}}&#8364;
-        </ion-button>
-      </ion-col>
-    </ion-row>
-      
+  <lista-platos *ngIf="showType==opciones[0]" [platos]="platos1" (OutPlato)="add($event)"></lista-platos>
+  <lista-platos *ngIf="showType==opciones[1]" [platos]="platos2" (OutPlato)="add($event)"></lista-platos>
+  <lista-platos *ngIf="showType==opciones[2]" [platos]="postres" (OutPlato)="add($event)"></lista-platos>
 </div>
 <ion-content>  
   <tabla-platos [pedidos]="lineasPedido" (addPlato)="add($event)" (subPlato)="sub($event)" (removePlato)="remove($event)"></tabla-platos>
-  <ion-label *ngIf="lineasPedido.length==0">Esperando pedido...</ion-label>
-  {{myDate}}
+  <ion-label *ngIf="lineasPedido.length==0" text-right>Esperando pedido...</ion-label>
 </ion-content>
+<div slot="fixed" style="padding-bottom: 4px !important;">
+  <ion-row>
+    <ion-col>
+        <ion-button style="font-weight: bold;" expand="full" shape="round" (click)="confirmarPedido()" [disabled]="lineasPedido.length==0" color="success">Confirmar</ion-button>
+    </ion-col>        
+    <ion-col>
+        <ion-button style="font-weight: bold;" expand="full" shape="round" (click)="resetPedido()" [disabled]="lineasPedido.length==0" color="danger">Cancelar</ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button style="font-weight: bold;" expand="full" shape="round" color="primary" [disabled]="true">
+        {{precioTotal | number:'.2'}}&#8364;
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</div>

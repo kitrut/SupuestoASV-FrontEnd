@@ -25,7 +25,7 @@ import { AuthService } from './services/auth.service';
     HttpClientModule,
     ModalCrearPlatoPageModule,
     ModalDetallePedidoPageModule
-  ],    
+  ],
   providers: [
     StatusBar,
     SplashScreen,
