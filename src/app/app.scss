@@ -29,3 +29,13 @@ ion-row{
       padding: 0 !important;
   }
 }
+
+ion-header{
+  ion-toolbar{
+    
+    ion-title{
+      font-weight: bold;
+      padding-top: 10px;
+    }
+  }
+}

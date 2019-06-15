@@ -10,8 +10,8 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  opciones:String[] = ["Todo","Primero","Segundo","Postre"];
   platos:Plato[];
-  navSelected:string='';
   constructor(private platoService: PlatosService,private modalController:ModalController,private authService:AuthService) {
 
   }
@@ -24,8 +24,11 @@ export class Tab2Page {
   }
 
   setFilteredItems(opt) {
-    this.navSelected=opt;
-    this.platos = this.platoService.filterItems(opt);
+    let seleccionada = opt.detail.value;
+    if(seleccionada==this.opciones[0]){
+      seleccionada='';
+    }
+    this.platos = this.platoService.filterItems(seleccionada);
   }
 
   getData(){
