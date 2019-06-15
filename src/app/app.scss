@@ -15,9 +15,8 @@ tr:nth-of-type(odd) {
 background: #eee; 
 }
 th { 
-  background: #7e57ff;
-  font-weight: bold; 
-  color: white;
+  background: #414681;
+  color: #ffffff;
 }
 td, th { 
   padding: 6px; 
@@ -28,5 +27,15 @@ td, th {
 ion-row{
   ion-col{
       padding: 0 !important;
+  }
+}
+
+ion-header{
+  ion-toolbar{
+    
+    ion-title{
+      font-weight: bold;
+      padding-top: 10px;
+    }
   }
 }

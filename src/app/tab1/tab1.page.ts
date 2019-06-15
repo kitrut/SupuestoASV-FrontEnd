@@ -14,6 +14,7 @@ import { TipoPedido } from '../models/tipo-pedido.enum';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit{
+  opciones:String[] = ["Primeros","Segundos","Postres"]
   usuario:String;
   showType:String = "Primeros";
   platos1:Plato[];
@@ -96,8 +97,8 @@ export class Tab1Page implements OnInit{
     return e1 && e2 ? e1.idPlato === e2.idPlato : e1 === e2;
   }
 
-  navChange(seleccion){
-    this.showType = seleccion;
+  navChange(value){
+    this.showType = value.detail.value;
   }
   add(ev:Plato){
     this.precioTotal+=ev.precio;

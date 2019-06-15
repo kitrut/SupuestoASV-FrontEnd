@@ -1,7 +1,7 @@
 {
   "name": "SupuestoASV-FrontEnd",
-  "version": "1.0.0",
-  "author": "Manuel Morote Herrero",
+  "version": "1.0.1",
+  "author": "mmh30@alu.ua.es",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",

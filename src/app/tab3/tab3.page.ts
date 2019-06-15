@@ -12,13 +12,11 @@ import { TipoPedido } from '../models/tipo-pedido.enum';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page implements OnInit{
-  
+  opciones:String[] = ["Todo","Emitido","Entregado","Pagado","Cancelado"];
+  MisPedidos:Pedido[];
 
   constructor(private pedidoService:PedidosService,private  authService:  AuthService,private modalController:ModalController) {}
-  MisPedidos:Pedido[];
-  navSelected:string='';
-  public searchTerm: string = "";
-
+  
   ngOnInit(): void {
     
   }
@@ -55,24 +53,28 @@ export class Tab3Page implements OnInit{
         item.state = TipoPedido.PAGADO;
       },
       err =>{
-
+        item.state=TipoPedido.ENTREGADO;
       }
     )    
   }
   cancel(item:Pedido){    
     this.pedidoService.cancelarPedido(item).subscribe(
       data => {
-        item.state=TipoPedido.CANCELADO;
+        if(data==null)item.state=TipoPedido.EMITIDO;
       },
       err =>{
-        
+        item.state=TipoPedido.EMITIDO;
       }
     )    
   }
 
   setFilteredItems(opt) {
-    this.navSelected=opt;
-    this.MisPedidos = this.pedidoService.filterItems(opt);
+    let seleccionada = opt.detail.value;
+    if(seleccionada==this.opciones[0]){
+      seleccionada='';
+    }
+    this.MisPedidos = this.pedidoService.filterItems(seleccionada);
+
   }
 
 }
