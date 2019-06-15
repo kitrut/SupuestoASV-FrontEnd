@@ -3,7 +3,7 @@
     <ion-title>
       Carta
     </ion-title>
-    <ion-segment (ionChange)="setFilteredItems($event)" value={{opciones[0]}}>
+    <ion-segment scrollable="true" (ionChange)="setFilteredItems($event)" value={{opciones[0]}}>
         <ion-segment-button *ngFor="let aux of opciones" value="{{aux}}">
           <ion-label>{{aux}}s</ion-label>
         </ion-segment-button>
