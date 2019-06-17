@@ -3,11 +3,7 @@
     <ion-title>
       Crear pedido
     </ion-title>
-    <ion-segment scrollable="true" (ionChange)="navChange($event)" value={{opciones[0]}}>
-        <ion-segment-button *ngFor="let aux of opciones" value="{{aux}}">
-          <ion-label>{{aux}}</ion-label>
-        </ion-segment-button>
-    </ion-segment>
+    <my-navbar [opciones]="opciones" (select)="navChange($event)"></my-navbar>
   </ion-toolbar>
 </ion-header>
 <div slot="fixed">

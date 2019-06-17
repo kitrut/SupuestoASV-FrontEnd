@@ -1,0 +1,5 @@
+<ion-segment scrollable="true" (ionChange)="navChange($event)" value="{{opciones[0]}}">
+  <ion-segment-button *ngFor="let aux of opciones" value="{{aux}}">
+    <ion-label>{{aux}}</ion-label>
+  </ion-segment-button>
+</ion-segment>

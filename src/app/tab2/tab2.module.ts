@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
 import { AbrevPipe } from '../pipes/abrev.pipe';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { AbrevPipe } from '../pipes/abrev.pipe';
     CommonModule,
     FormsModule,
     RouterModule.forChild([{ path: '', component: Tab2Page }]),
+    SharedModule
   ],
   declarations: [Tab2Page,AbrevPipe]
 })
