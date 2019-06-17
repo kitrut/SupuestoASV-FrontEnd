@@ -69,11 +69,10 @@ export class Tab3Page implements OnInit{
   }
 
   setFilteredItems(opt) {
-    let seleccionada = opt.detail.value;
-    if(seleccionada==this.opciones[0]){
-      seleccionada='';
+    if(opt==this.opciones[0]){
+      opt='';
     }
-    this.MisPedidos = this.pedidoService.filterItems(seleccionada);
+    this.MisPedidos = this.pedidoService.filterItems(opt);
 
   }
 

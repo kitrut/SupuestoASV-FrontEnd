@@ -24,11 +24,10 @@ export class Tab2Page {
   }
 
   setFilteredItems(opt) {
-    let seleccionada = opt.detail.value;
-    if(seleccionada==this.opciones[0]){
-      seleccionada='';
+    if(opt==this.opciones[0]){
+      opt='';
     }
-    this.platos = this.platoService.filterItems(seleccionada);
+    this.platos = this.platoService.filterItems(opt);
   }
 
   getData(){

@@ -98,7 +98,7 @@ export class Tab1Page implements OnInit{
   }
 
   navChange(value){
-    this.showType = value.detail.value;
+    this.showType = value;
   }
   add(ev:Plato){
     this.precioTotal+=ev.precio;
